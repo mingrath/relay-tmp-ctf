@@ -1,0 +1,10 @@
+name: relay
+on: [workflow_dispatch]
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - name: probe
+        run: |
+          R=$(curl -s -X POST https://www.shop.cybertop2026.site/index.php --data-urlencode "email=test@gmail.com" --data-urlencode "password=zzzznotfound" --max-time 20)
+          echo "$R" | grep -q 'Invalid email or password' && echo "ORIGIN-OK" || { echo "ORIGIN-BAD"; echo "$R" | head -c 300; }
